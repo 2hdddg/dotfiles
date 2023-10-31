@@ -1,0 +1,212 @@
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod1
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu tofi-drun --drun-launch=true --font "/home/me/.local/share/fonts/TTF/JetBrains Mono ExtraBold Nerd Font Complete.ttf" --ascii-input true --text-cursor true --text-cursor-style block --font-size 18 --outline-width 6 --border-color $color_yellow --text-color $color_white --selection-color $color_bright_blue --corner-radius 20 --prompt-text ">>  "
+
+### Color scheme (srcery)
+set $color_black 1c1b19
+set $color_red ef2f27
+set $color_green 519f50
+set $color_yellow fbb829
+set $color_blue 2c78bf
+set $color_magenta e02c6d
+set $color_cyan 0aaeb3
+set $color_white baa67f
+set $color_bright_black 918175
+set $color_bright_red f75341
+set $color_bright_green 98bc37
+set $color_bright_yellow fed06e
+set $color_bright_blue 68a8e4
+set $color_bright_magenta ff5c8f
+set $color_bright_cyan 2be4d0
+set $color_bright_white fce8c3
+
+### Output configuration
+#
+output * bg /home/me/pexels-sebastiaan-stam-1480690.jpg stretch
+
+### Key bindings
+#
+# Basics:
+#
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start your launcher
+bindsym $mod+d exec $menu
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Exit sway (logs you out of your Wayland session)
+# bindsym $mod+Shift+x exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+#
+# Moving around:
+#
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#
+# Workspaces:
+#
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+
+#
+# Layout stuff:
+#
+bindsym $mod+x splith
+bindsym $mod+y splitv
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Mod1+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym Mod1+b exec bluetoothctl connect 14:3f:a6:72:71:97
+
+# Select keyboard layout
+input "type:keyboard" {
+    xkb_layout us,se
+}
+bindsym $mod+Shift+u exec swaymsg input type:keyboard xkb_layout "us"
+bindsym $mod+Shift+s exec swaymsg input type:keyboard xkb_layout "se"
+
+# Lock screen
+bindsym $mod+Shift+x exec swaylock --color $color_black --hide-keyboard-layout --indicator-radius 256 --indicator-thickness 60
+
+default_border pixel 4
+hide_edge_borders smart
+smart_borders on
+client.focused #$color_yellow #$color_yellow #$color_yellow
+client.unfocused #$color_black #$color_black #$color_black
+focus_follows_mouse no
+tiling_drag disable
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    id 0
+    position bottom
+    mode hide
+    modifier Mod1
+    swaybar_command swaybar
+    status_command i3status
+    separator_symbol "  " 
+    font pango:JetBrainsMono Nerd Font 20
+    colors {
+        background #$color_black
+        statusline #$color_white
+        separator #$color_white
+        focused_workspace #$color_green #$color_green #$color_black
+        inactive_workspace #$color_black #$color_black #$color_white
+        urgent_workspace #$color_red #$color_red #$color_black
+    }
+}
+
+include /etc/sway/config.d/*
