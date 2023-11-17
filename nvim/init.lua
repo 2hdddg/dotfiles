@@ -240,7 +240,7 @@ require('neo-tree').setup({
         },
     },
     popup_border_style = "rounded",
-    enable_git_status = false,
+    enable_git_status = true,
     default_component_configs = {
         indent = {
             indent_size = 4,
@@ -249,11 +249,30 @@ require('neo-tree').setup({
         symlink_target = {
             enabled = true,
         },
+        name = {
+            use_git_status_colors = false,
+        },
+        git_status = {
+            symbols = {
+                -- Change type
+                added = "+",
+                deleted = "-",
+                modified = "!",
+                renamed = ">",
+                -- Status type
+                untracked = "?",
+                ignored = "",
+                unstaged = "",
+                staged = "",
+                conflict = "",
+            },
+        },
     },
     filesystem = {
         filtered_items = {
             visible = true,
         },
+        bind_to_cwd = false,
     },
     event_handlers = {
         {

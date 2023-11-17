@@ -20,6 +20,8 @@ local theme = {
     Folded = {fg=colors.bright_black, bg=colors.black, style="italic"},
     FoldColumn = {fg=colors.bright_black, bg=colors.black},
     Cursor = {fg=colors.black, bg=colors.yellow},
+    TermCursor = {fg=colors.yellow, bg=colors.black},
+    TermCursorNC = {fg=colors.yellow, bg=colors.black},
     -- Popup border and background
     FloatBorder = {fg=colors.yellow},
     NormalFloat = {bg=colors.black},
@@ -97,7 +99,7 @@ local theme = {
     -- Make special chars stick out from string
     Special = {fg=colors.red},
     -- SpecialComment
-    Todo = {fg=colors.xorange},
+    Todo = {fg=colors.xorange, bg=colors.black},
     Typedef = {link='Type'},
     -- Treesitter
     ['@namespace'] = {fg=colors.bright_black},
@@ -131,6 +133,10 @@ local theme = {
 
     -- TermDebug
     debugPC = { bg=colors.xgray6, style="NONE" },
+
+    -- Neo-tree
+    NeoTreeGitIgnored = {link='Comment'},
+    NeoTreeFileStats = {link='Comment'},
 }
 
 local function highlight(group, properties)
