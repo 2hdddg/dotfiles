@@ -133,10 +133,6 @@ local theme = {
 
     -- TermDebug
     debugPC = { bg=colors.xgray6, style="NONE" },
-
-    -- Neo-tree
-    NeoTreeGitIgnored = {link='Comment'},
-    NeoTreeFileStats = {link='Comment'},
 }
 
 local function highlight(group, properties)
