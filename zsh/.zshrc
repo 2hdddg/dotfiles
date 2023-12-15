@@ -1,14 +1,11 @@
 PROMPT='%F{black}%(?..%K{yellow}  %? )%K{cyan} %~%k%F{cyan}%f '
+
+ZLS_COLORS=''
 zmodload -i zsh/complist
 autoload -Uz compinit
 compinit
-ZLS_COLORS=''
 
 # Key bindings
-#bindkey -M menuselect 'h' vi-backward-char
-#bindkey -M menuselect 'k' vi-up-line-or-history
-#bindkey -M menuselect 'j' vi-down-line-or-history
-#bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect ' ' history-incremental-search-forward
 # Auto completion using arrow keys (based on history). Terminal specific
 # Detect with ctrl+v up/down
@@ -20,11 +17,13 @@ alias ls='ls --color=auto'
 alias l='ls -al --color=auto'
 alias grep='grep --color=auto'
 alias s='git status -sb'
+alias d='dirs -v' # Lists directory history
 
 # Navigation
 setopt autocd
 setopt autopushd
-
+setopt pushdsilent
+setopt pushdminus
 # Misc
 setopt no_beep
 
@@ -41,8 +40,9 @@ zstyle ':completion:*' completer _extensions _complete _ignored _approximate
 zstyle ':completion:*'  file-list all
 zstyle ':completion:*:default' list-colors '=*=90'
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select interactive search
 zstyle ':completion:*' verbose true
+zstyle ':completion:*:*:*:*:descriptions' format '%F{yellow}-- %d --%f'
 
 # History
 HISTFILE=~/.histfile
@@ -53,10 +53,6 @@ setopt append_history
 setopt inc_append_history
 setopt share_history
 autoload -U +X bashcompinit && bashcompinit
-
-
-
-
 
 #
 # Update terminal/tmux window titles based on location/command
