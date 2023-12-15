@@ -39,12 +39,18 @@ set $color_bright_white fce8c3
 #
 output * bg /home/me/pexels-sebastiaan-stam-1480690.jpg stretch
 
+# Start zenway
+exec /home/me/code/zenway/build/zenway > /home/me/zenway.log
+
 ### Key bindings
 #
 # Basics:
 #
 # Start a terminal
 bindsym $mod+Return exec $term
+
+#bindsym $mod+Print exec 'grim ~/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
+bindsym $mod+Print exec 'grim -c ~/ps_$(date +"%Y%m%d%H%M%S").png'
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -54,7 +60,6 @@ bindsym $mod+d exec $menu
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
-
 # Exit sway (logs you out of your Wayland session)
 # bindsym $mod+Shift+x exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
@@ -196,21 +201,21 @@ tiling_drag disable
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     id 0
-    position bottom
+#    position bottom
     mode hide
     modifier Mod1
-    swaybar_command swaybar
-    status_command i3status
-    separator_symbol "  " 
-    font pango:JetBrainsMono Nerd Font 20
-    colors {
-        background #$color_black
-        statusline #$color_white
-        separator #$color_white
-        focused_workspace #$color_green #$color_green #$color_black
-        inactive_workspace #$color_black #$color_black #$color_white
-        urgent_workspace #$color_red #$color_red #$color_black
-    }
+    swaybar_command whatever
+    #swaybar_command /home/me/.zenway
+#    separator_symbol "  " 
+#    font pango:JetBrainsMono Nerd Font 20
+#    colors {
+#        background #$color_black
+#        statusline #$color_white
+#        separator #$color_white
+#        focused_workspace #$color_green #$color_green #$color_black
+#        inactive_workspace #$color_black #$color_black #$color_white
+#        urgent_workspace #$color_red #$color_red #$color_black
+#    }
 }
 
 include /etc/sway/config.d/*
