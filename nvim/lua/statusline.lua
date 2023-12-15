@@ -40,6 +40,27 @@ local function classOrSearch()
     return classInStatusLine()
 end
 
+local function pathOrFilename()
+    -- Only filename
+    name = vim.fn.expand('%:t')
+    if name == '' then
+        -- Probably an oil.nvim buffer, anyway use full path
+        name = vim.fn.expand('%')
+        if string.find(name, "oil://") == 1 then
+            name = string.gsub(name, "oil://", "", 1)
+        end
+    end
+    -- Append modifications
+    opts = ''
+    if vim.bo.modified then
+        opts = ' 󰙏'
+    elseif not vim.bo.modifiable or vim.bo.readonly then
+        opts = ' '
+    end
+    -- Compose
+    return name .. opts
+end
+
 local theme = {
   normal = {
     a = {bg = colors.green, fg = colors.black },
@@ -74,7 +95,7 @@ local theme = {
     z = {bg = colors.xgray6, fg = colors.black},
   },
   inactive_sections = {
-    lualine_a = {'filename'},
+    lualine_a = {pathOrFilename},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}}},
@@ -91,7 +112,7 @@ require'lualine'.setup {
     disabled_filetypes = {'class'}
   },
   sections = {
-    lualine_a = {'filename'},
+    lualine_a = {pathOrFilename},
     lualine_b = {recordingMacro},
     lualine_c = {classOrSearch},
     lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}}},

@@ -31,6 +31,8 @@ vim.opt.matchtime = 1
 vim.g.mapleader = " "
 vim.lsp.set_log_level("off")
 
+-- For TODO highlight to work: TSInstall comment
+
 local plugins = {
     -- LSP configuration support
     'neovim/nvim-lspconfig',
@@ -131,8 +133,8 @@ set_keymap("n", "<leader>c", "<cmd>lua require('telescope.builtin').git_bcommits
 set_keymap("n", "<leader>C", "<cmd>lua require('telescope.builtin').git_commits()<cr>", keymap_options)
 set_keymap("n", "<leader>d", "<cmd>Telescope diagnostics bufnr=0<cr>", keymap_options)                          -- Show diagnostics for current buffer
 set_keymap("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", keymap_options)                                  -- Show all diagnostics
-set_keymap("n", "<leader>e", "<cmd>Oil --float<cr>", keymap_options)
-set_keymap("n", "<leader>E", "<cmd>Oil . --float<cr>", keymap_options)
+set_keymap("n", "<leader>e", "<cmd>Oil<cr>", keymap_options)
+set_keymap("n", "<leader>E", "<cmd>Oil .<cr>", keymap_options)
 vim.keymap.set("n", "<leader>f", function()
   local opts = {}
   vim.fn.system('git rev-parse --is-inside-work-tree')
@@ -223,16 +225,15 @@ require('oil').setup({
         "permissions", "size", "mtime", "icon",
     },
     buf_options = {
-        buflisted = true, -- history back from terminal to oil
+        buflisted = true,
+
     },
     view_options = {
         show_hidden = true,
     },
     keymaps = {
         ["<CR>"] = "actions.select",
-        ["<DOWN>"] = "actions.select",
         ["<BS>"] = "actions.parent",
-        ["<UP>"] = "actions.parent",
         ["Y"] = "actions.copy_entry_path",
         ["<C-z>"] = "actions.open_terminal",
         ["<C-c>"] = "actions.open_cmdline_dir",

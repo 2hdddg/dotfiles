@@ -101,6 +101,7 @@ local theme = {
     -- SpecialComment
     Todo = {fg=colors.xorange, bg=colors.black},
     Typedef = {link='Type'},
+    -- TODO: 
     -- Treesitter
     ['@namespace'] = {fg=colors.bright_black},
     ['@variable'] = {fg=colors.white},
