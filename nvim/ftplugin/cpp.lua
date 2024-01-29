@@ -16,7 +16,7 @@ require('lspconfig').clangd.setup{
     on_attach = on_attach,
     capabilities = capabilities,
     -- Clangd specific settings
-    cmd = { "clangd", "--all-scopes-completion", "--background-index", "--clang-tidy", "--header-insertion=iwyu", "--header-insertion-decorators", "--completion-style=detailed", "--pretty" },
+    cmd = { "clangd", "--all-scopes-completion", "--offset-encoding=utf-16", "--background-index", "--clang-tidy", "--header-insertion=iwyu", "--header-insertion-decorators", "--completion-style=detailed", "--pretty" },
 }
 require("clangd_extensions").setup({})
 vim.cmd('packadd termdebug')

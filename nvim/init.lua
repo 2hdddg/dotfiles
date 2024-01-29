@@ -176,6 +176,8 @@ set_keymap("n", "<C-h>", "<C-w>h", keymap_options)
 set_keymap("n", "<C-j>", "<C-w>j", keymap_options)
 set_keymap("n", "<C-k>", "<C-w>k", keymap_options)
 set_keymap("n", "<C-l>", "<C-w>l", keymap_options)
+-- Open link. Standard keymap but hack due to netrw disabled
+set_keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape(expand('<cfile>'), 1)<cr>", keymap_options)
 
 -- Setup treesitter to use highlighting
 require('nvim-treesitter.configs').setup({
