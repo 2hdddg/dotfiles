@@ -151,6 +151,7 @@ set_keymap("n", "<leader>q", "<cmd>lua require('telescope.builtin').quickfix()<c
 set_keymap("n", "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", keymap_options)
 set_keymap("n", "<leader>S", "<cmd>Telescope lsp_workspace_symbols<cr>", keymap_options)
 set_keymap("n", "<leader>1", "<cmd>lua vim.o.relativenumber = not vim.o.relativenumber<cr>", keymap_options)
+set_keymap("n", "<leader>?", "<cmd>lua require('telescope.builtin').live_grep({cwd='~/Documents'})<cr>", keymap_options)
 -- COMMA
 set_keymap("n", ",a", "<cmd>lua vim.lsp.buf.code_action()<cr>", keymap_options)
 set_keymap("n", ",b", "<cmd>Git blame<CR>", keymap_options)
