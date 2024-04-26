@@ -67,8 +67,7 @@ function update_title() {
   a=${a//$'\n'/}
   if [[ -n "$TMUX" ]] && [[ $TERM == screen* || $TERM == tmux* ]]; then
     print -n "\ek${(%)a}:${(%)2}\e\\"
-  elif [[ "$TERM" =~ "screen*" ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
+  elif [[ "$TERM" =~ "screen*" ]]; then print -n "\ek${(%)a}:${(%)2}\e\\"
   elif [[ "$TERM" =~ "xterm*" || "$TERM" =~ "alacritty|wezterm" || "$TERM" =~ "st*" ]]; then
     print -n "\e]0;${(%)a}:${(%)2}\a"
   elif [[ "$TERM" =~ "^rxvt-unicode.*" ]]; then
@@ -102,3 +101,16 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _zsh_title__precmd
 add-zsh-hook preexec _zsh_title__preexec
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+# Height of fzf window. Selected first
+export FZF_DEFAULT_OPTS='--height 20 --reverse --border=sharp --margin=1
+ --color=16 
+ --color=bg:0,fg:7,hl:3 
+ --color=bg+:8,fg+:0,hl+:0 
+ --color=gutter:0
+ --color=info:3,border:3,prompt:0 
+ --color=pointer:0,marker:9,spinner:9,header:1 
+'
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
