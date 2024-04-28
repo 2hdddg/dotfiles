@@ -101,10 +101,12 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _zsh_title__precmd
 add-zsh-hook preexec _zsh_title__preexec
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-# Height of fzf window. Selected first
-export FZF_DEFAULT_OPTS='--height 20 --reverse --border=sharp --margin=1
+eval "$(fzf --zsh)"
+export FZF_DEFAULT_OPTS='
+ --height 20 
+ --reverse 
+ --border=sharp 
+ --margin=1
  --color=16 
  --color=bg:0,fg:7,hl:3 
  --color=bg+:8,fg+:0,hl+:0 
