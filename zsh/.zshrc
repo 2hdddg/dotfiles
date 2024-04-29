@@ -101,7 +101,17 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _zsh_title__precmd
 add-zsh-hook preexec _zsh_title__preexec
 
-eval "$(fzf --zsh)"
+if fzf --zsh > /dev/null 2>&1
+then
+    eval "$(fzf --zsh)"
+elif [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ];
+then
+    # Debian
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    source /usr/share/doc/fzf/examples/completion.zsh
+else
+    echo "No fzf completion and key binding files"
+fi
 export FZF_DEFAULT_OPTS='
  --height 20 
  --reverse 
@@ -116,3 +126,4 @@ export FZF_DEFAULT_OPTS='
 '
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
+
