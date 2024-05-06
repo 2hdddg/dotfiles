@@ -127,6 +127,10 @@ local theme = {
     LspDiagnosticsUnderlineWarning = {fg=colors.bright_yellow, style='underline'},
     LspDiagnosticsUnderlineInformation = {fg=colors.bright_green, style='underline'},
     LspDiagnosticsUnderlineHint = { fg=colors.bright_cyan, style='underline'},
+    ['@lsp.type.namespace'] = {fg=colors.xgray6},
+    ['@lsp.typemod.type.definition'] = {fg=colors.blue},
+    ['@lsp.typemod.method.definition'] = {fg=colors.bright_magenta},
+    ['@lsp.typemod.function.definition'] = {fg=colors.bright_magenta},
 
     -- CMP (ItemKind is just the kind, not the actual name)
     CmpItemKindDefault = {link='Identifier'},
