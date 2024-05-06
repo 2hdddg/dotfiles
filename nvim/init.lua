@@ -62,7 +62,7 @@ local plugins = {
     'nvim-lua/popup.nvim',
     'nvim-lua/plenary.nvim',
     -- Native fzf
-    { 'nvim-telescope/telescope-fzf-native.nvim', run = "make" },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
     -- Fuzzy finder over lists
     { 'nvim-telescope/telescope.nvim', branch = '0.1.x'  },
     -- Syntax highlight and more
