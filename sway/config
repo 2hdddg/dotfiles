@@ -51,6 +51,7 @@ bindsym $mod+Return exec $term
 
 #bindsym $mod+Print exec 'grim ~/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
 bindsym $mod+Print exec 'grim -c ~/ps_$(date +"%Y%m%d%H%M%S").png'
+bindsym Shift+Print exec 'grim -c ~/ps_$(date +"%Y%m%d%H%M%S").png'
 
 # Kill focused window
 bindsym $mod+Shift+q kill
