@@ -3,7 +3,7 @@ local theme = {
     CursorLine = { bg=colors.xgray2, style="NONE" },
     CursorColumn = { bg=colors.xgray2 },
     MatchParen = { style = "inverse" },
-    ColorColumn = { bg = colors.xgray2 },
+    ColorColumn = { bg = colors.xgray2, style="NONE" },
     Conceal = { fg = colors.blue },
     CursorLineNr = { fg = colors.yellow, bg = colors.black },
     Visual = { fg='NONE', bg='NONE', style = "reverse" }, -- VisualNOS
@@ -34,7 +34,9 @@ local theme = {
 
     -- Telescope, style as completion menu
     TelescopeNormal = { link = 'Pmenu' },
+    TelescopeResultsNormal = { bg = colors.black },
     TelescopePreviewNormal = { bg = colors.black }, -- Make preview of code look normal
+    TelescopePromptNormal = { bg = colors.black }, -- Make preview of code look normal
     TelescopeSelection = { link = 'PmenuSel' },
     TelescopeMatching = {style = "reverse" },
     TelescopeBorder = {link = 'FloatBorder'},
