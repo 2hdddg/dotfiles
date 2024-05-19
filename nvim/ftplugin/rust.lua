@@ -7,12 +7,9 @@ local nvim_lsp = require'lspconfig'
 
 local on_attach = function(client)
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-    require'completion'.on_attach(client)
 end
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 nvim_lsp.rust_analyzer.setup({
     on_attach=on_attach,
-    capabilities = capabilities,
     settings = {
         ["rust-analyzer"] = {
             imports = {

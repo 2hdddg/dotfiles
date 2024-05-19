@@ -27,10 +27,19 @@ local theme = {
     NormalFloat = {bg=colors.black},
 
     -- Completion menu
-    Pmenu = { fg=colors.white, bg=colors.black },
-    PmenuSel = { style="reverse" },
+    Pmenu = { bg=colors.white, fg=colors.xgray2 },
+    PmenuSel = { fg=colors.xorange, style="reverse" },
     PmenuSbar = { bg=colors.black },
     PmenuThumb = { bg=colors.black },
+    --Pmenu
+    --PmenuExtra
+    --PmenuSel
+    --PmenuKind
+    --PmenuKindSel
+    --PmenuExtraSel
+    --PmenuSbar
+    --PmenuThumb
+
 
     -- Telescope, style as completion menu
     TelescopeNormal = { link = 'Pmenu' },
@@ -137,6 +146,7 @@ local theme = {
     -- CMP (ItemKind is just the kind, not the actual name)
     CmpItemKindDefault = {link='Identifier'},
     CmpItemKindFunction = {link='Function'},
+    MiniCompletionActiveParameter = {fg=colors.xorange},
 
     -- TermDebug
     debugPC = { bg=colors.xgray6, style="NONE" },

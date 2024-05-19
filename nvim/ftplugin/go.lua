@@ -5,10 +5,8 @@ local on_attach = function(client, bufnr)
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 end
 local lspconfig = require'lspconfig'
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig.gopls.setup{
     on_attach = on_attach,
-    capabilities = capabilities,
     settings = {
         gopls = {
             analyses = {

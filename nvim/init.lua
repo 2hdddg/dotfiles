@@ -13,7 +13,7 @@ vim.o.signcolumn = "yes:1"
 vim.o.clipboard = "unnamed,unnamedplus"
 vim.o.gdefault = false -- Otherwise substitution doesn't work multiple times per line
 vim.o.cmdheight = 0 -- Gives one more line of core. Requires nvim >= 0.8
-vim.o.completeopt = "menu,menuone,noselect" -- As requested by nvim-cmp
+vim.o.completeopt = "menu,noinsert,popup"
 vim.o.relativenumber = true
 vim.o.pumheight = 10 -- Size of completion pop
 vim.o.pumwidth = 80
@@ -38,24 +38,7 @@ local plugins = {
     'neovim/nvim-lspconfig',
     -- Enhanced C++
     'p00f/clangd_extensions.nvim',
-    -- Enhanced Java LSP support
-    --'mfussenegger/nvim-jdtls',
-    -- Debugger support
-    --'mfussenegger/nvim-dap',
-    -- Auto completion sources
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-vsnip',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    -- Snippets
-    'hrsh7th/vim-vsnip',
-    'hrsh7th/vim-vsnip-integ',
-    -- And some actual snippets
-    'rafamadriz/friendly-snippets',
-    -- Completion itself
-    'hrsh7th/nvim-cmp',
+    { 'echasnovski/mini.completion', branch = 'stable' },
     -- Git
     'tpope/vim-fugitive',
     -- For telescope
@@ -103,8 +86,43 @@ if install_plugins then
 end
 
 require("marks").setup({})
-require('completion')
+require('mini.completion').setup({
+    window = {
+        info = { height = 25, width = 80, border= "rounded" },
+        signature = { height = 25, width = 80, border="rounded" },
+    },
+    set_vim_settings = false,
+})
+-- Mini completion uses pum popup menu
+-- Popup menu, ctrl+j next item
+vim.keymap.set('i', '<C-j>', function()
+  if vim.fn.pumvisible() == 1 then
+    return '<C-n>'
+  end
+end, { expr = true })
+-- Popup menu, ctrl+k next item
+vim.keymap.set('i', '<C-k>', function()
+  if vim.fn.pumvisible() == 1 then
+    return '<C-p>'
+  end
+end, { expr = true })
+-- Select menu item with enter
+vim.keymap.set('i', '<CR>', function()
+  if vim.fn.pumvisible() == 1 then
+    return '<C-y>'
+  end
+  return '<CR>'
+end, { expr = true })
+-- Close popup menu with esc
+vim.keymap.set('i', '<esc>', function()
+  if vim.fn.pumvisible() == 1 then
+    return '<C-e>'
+  end
+  return '<esc>'
+end, { expr = true })
+
 require('finder')
+
 require('highlights')
 require('statusline') -- Must be after highlights
 
@@ -214,13 +232,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] =
     border = "single"
   }
 )
-
--- Vsnip
--- Jump forward or backward
-vim.cmd[[imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
-vim.cmd[[smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
-vim.cmd[[imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
-vim.cmd[[smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
 
 -- Oil
 require('oil').setup({
