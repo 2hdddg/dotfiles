@@ -93,36 +93,7 @@ require('mini.completion').setup({
     },
     set_vim_settings = false,
 })
--- Mini completion uses pum popup menu
--- Popup menu, ctrl+j next item
-vim.keymap.set('i', '<C-j>', function()
-  if vim.fn.pumvisible() == 1 then
-    return '<C-n>'
-  end
-end, { expr = true })
--- Popup menu, ctrl+k next item
-vim.keymap.set('i', '<C-k>', function()
-  if vim.fn.pumvisible() == 1 then
-    return '<C-p>'
-  end
-end, { expr = true })
--- Select menu item with enter
-vim.keymap.set('i', '<CR>', function()
-  if vim.fn.pumvisible() == 1 then
-    return '<C-y>'
-  end
-  return '<CR>'
-end, { expr = true })
--- Close popup menu with esc
-vim.keymap.set('i', '<esc>', function()
-  if vim.fn.pumvisible() == 1 then
-    return '<C-e>'
-  end
-  return '<esc>'
-end, { expr = true })
-
 require('finder')
-
 require('highlights')
 require('statusline') -- Must be after highlights
 
@@ -137,22 +108,30 @@ end
 -- Keymaps
 -- ==========================
 local keymap_options = { noremap = true, silent = true }
-local set_keymap = vim.api.nvim_set_keymap
+local replace_keycodes = { expr = true }
+local key_if_pum_visible = function(key_if, key_if_not)
+    if vim.fn.pumvisible() == 1 then
+        return key_if
+    end
+    if key_if_not then
+        return key_if_not
+    end
+end
 -- UNCATEGORIZED
 -- jk is escape from insert
-set_keymap("i", "jk", "<esc>", keymap_options)
-set_keymap("t", "jk", "<C-\\><C-n>", keymap_options)
+vim.keymap.set("i", "jk", "<esc>", keymap_options)
+vim.keymap.set("t", "jk", "<C-\\><C-n>", keymap_options)
 -- Disable space in normal mode as long as it is the leader
-set_keymap("n", "<space>", "<nop>", keymap_options)
+vim.keymap.set("n", "<space>", "<nop>", keymap_options)
 -- LEADER
-set_keymap("n", "<leader>n", "<cmd>nohl<cr>", keymap_options)                                                   -- Clear highlight
-set_keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", keymap_options)             -- List of buffers
-set_keymap("n", "<leader>c", "<cmd>lua require('telescope.builtin').git_bcommits()<cr>", keymap_options)
-set_keymap("n", "<leader>C", "<cmd>lua require('telescope.builtin').git_commits()<cr>", keymap_options)
-set_keymap("n", "<leader>d", "<cmd>Telescope diagnostics bufnr=0<cr>", keymap_options)                          -- Show diagnostics for current buffer
-set_keymap("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", keymap_options)                                  -- Show all diagnostics
-set_keymap("n", "<leader>e", "<cmd>Oil<cr>", keymap_options)
-set_keymap("n", "<leader>E", "<cmd>Oil .<cr>", keymap_options)
+vim.keymap.set("n", "<leader>n", "<cmd>nohl<cr>", keymap_options)                                                   -- Clear highlight
+vim.keymap.set("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", keymap_options)             -- List of buffers
+vim.keymap.set("n", "<leader>c", "<cmd>lua require('telescope.builtin').git_bcommits()<cr>", keymap_options)
+vim.keymap.set("n", "<leader>C", "<cmd>lua require('telescope.builtin').git_commits()<cr>", keymap_options)
+vim.keymap.set("n", "<leader>d", "<cmd>Telescope diagnostics bufnr=0<cr>", keymap_options)                          -- Show diagnostics for current buffer
+vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics<cr>", keymap_options)                                  -- Show all diagnostics
+vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", keymap_options)
+vim.keymap.set("n", "<leader>E", "<cmd>Oil .<cr>", keymap_options)
 vim.keymap.set("n", "<leader>f", function()
   local opts = {}
   vim.fn.system('git rev-parse --is-inside-work-tree')
@@ -162,41 +141,52 @@ vim.keymap.set("n", "<leader>f", function()
     require"telescope.builtin".find_files(opts)
   end
 end)
-set_keymap("n", "<leader>F", "<cmd>lua require('telescope.builtin').find_files()<cr>", keymap_options)          -- Fuzzy find among all files
-set_keymap("n", "<leader>g", "<cmd>lua require('telescope.builtin').grep_string()<cr>", keymap_options)         -- Grep under cursor
-set_keymap("n", "<leader>G", "<cmd>lua require('telescope.builtin').live_grep()<cr>", keymap_options)           -- Live grep
-set_keymap("n", "<leader>q", "<cmd>lua require('telescope.builtin').quickfix()<cr>", keymap_options)            -- List of quick fixes
-set_keymap("n", "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", keymap_options)
-set_keymap("n", "<leader>S", "<cmd>Telescope lsp_workspace_symbols<cr>", keymap_options)
-set_keymap("n", "<leader>1", "<cmd>lua vim.o.relativenumber = not vim.o.relativenumber<cr>", keymap_options)
-set_keymap("n", "<leader>?", "<cmd>lua require('telescope.builtin').live_grep({cwd='~/Documents'})<cr>", keymap_options)
+vim.keymap.set("n", "<leader>F", "<cmd>lua require('telescope.builtin').find_files()<cr>", keymap_options)          -- Fuzzy find among all files
+vim.keymap.set("n", "<leader>g", "<cmd>lua require('telescope.builtin').grep_string()<cr>", keymap_options)         -- Grep under cursor
+vim.keymap.set("n", "<leader>G", "<cmd>lua require('telescope.builtin').live_grep()<cr>", keymap_options)           -- Live grep
+vim.keymap.set("n", "<leader>q", "<cmd>lua require('telescope.builtin').quickfix()<cr>", keymap_options)            -- List of quick fixes
+vim.keymap.set("n", "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", keymap_options)
+vim.keymap.set("n", "<leader>S", "<cmd>Telescope lsp_workspace_symbols<cr>", keymap_options)
+vim.keymap.set("n", "<leader>1", "<cmd>lua vim.o.relativenumber = not vim.o.relativenumber<cr>", keymap_options)
+vim.keymap.set("n", "<leader>?", "<cmd>lua require('telescope.builtin').live_grep({cwd='~/Documents'})<cr>", keymap_options)
 -- COMMA
-set_keymap("n", ",a", "<cmd>lua vim.lsp.buf.code_action()<cr>", keymap_options)
-set_keymap("n", ",b", "<cmd>Git blame<CR>", keymap_options)
-set_keymap("n", ",d", "<cmd>lua require('telescope.builtin').lsp_definitions({show_line=false})<CR>", keymap_options)
-set_keymap("n", ",i", "<cmd>lua require('telescope.builtin').lsp_implementations({show_line=false})<CR>", keymap_options)
-set_keymap("n", ",h", "<cmd>lua vim.lsp.buf.signature_help()<CR>", keymap_options)
-set_keymap("n", ",H", "<cmd>lua vim.lsp.buf.hover()<CR>", keymap_options)
-set_keymap("n", ",r", "<cmd>lua require('telescope.builtin').lsp_references({show_line=false})<CR>", keymap_options)
-set_keymap("n", ",n", "<cmd>lua vim.lsp.buf.rename()<CR>", keymap_options)
-set_keymap("n", ",w", "<cmd>w<CR>", keymap_options)
-set_keymap("n", ",W", "<cmd>noautocmd w<CR>", keymap_options)
+vim.keymap.set("n", ",a", "<cmd>lua vim.lsp.buf.code_action()<cr>", keymap_options)
+vim.keymap.set("n", ",b", "<cmd>Git blame<CR>", keymap_options)
+vim.keymap.set("n", ",d", "<cmd>lua require('telescope.builtin').lsp_definitions({show_line=false})<CR>", keymap_options)
+vim.keymap.set("n", ",i", "<cmd>lua require('telescope.builtin').lsp_implementations({show_line=false})<CR>", keymap_options)
+vim.keymap.set("n", ",h", "<cmd>lua vim.lsp.buf.signature_help()<CR>", keymap_options)
+vim.keymap.set("n", ",H", "<cmd>lua vim.lsp.buf.hover()<CR>", keymap_options)
+vim.keymap.set("n", ",r", "<cmd>lua require('telescope.builtin').lsp_references({show_line=false})<CR>", keymap_options)
+vim.keymap.set("n", ",n", "<cmd>lua vim.lsp.buf.rename()<CR>", keymap_options)
+vim.keymap.set("n", ",w", "<cmd>w<CR>", keymap_options)
+vim.keymap.set("n", ",W", "<cmd>noautocmd w<CR>", keymap_options)
 -- Terminal
 -- Toggle to terminal from normal mode and back again. Hard coded for 4 active terminals
-set_keymap("t", "<C-z>", "<cmd>lua require('toggleTerm').from_terminal()<cr>", keymap_options)
-set_keymap("n", "<C-z>", "<cmd>lua require('toggleTerm').from_terminal()<cr>", keymap_options)
-set_keymap("n", ",1", "<cmd>lua require('toggleTerm').to_terminal(1)<cr>", keymap_options)
-set_keymap("n", ",2", "<cmd>lua require('toggleTerm').to_terminal(2)<cr>", keymap_options)
-set_keymap("n", ",3", "<cmd>lua require('toggleTerm').to_terminal(3)<cr>", keymap_options)
-set_keymap("n", ",4", "<cmd>lua require('toggleTerm').to_terminal(4)<cr>", keymap_options)
+vim.keymap.set("t", "<C-z>", "<cmd>lua require('toggleTerm').from_terminal()<cr>", keymap_options)
+vim.keymap.set("n", "<C-z>", "<cmd>lua require('toggleTerm').from_terminal()<cr>", keymap_options)
+vim.keymap.set("n", ",1", "<cmd>lua require('toggleTerm').to_terminal(1)<cr>", keymap_options)
+vim.keymap.set("n", ",2", "<cmd>lua require('toggleTerm').to_terminal(2)<cr>", keymap_options)
+vim.keymap.set("n", ",3", "<cmd>lua require('toggleTerm').to_terminal(3)<cr>", keymap_options)
+vim.keymap.set("n", ",4", "<cmd>lua require('toggleTerm').to_terminal(4)<cr>", keymap_options)
 vim.keymap.set("t", '<C-l>', term_clear)
 -- Window navigation
-set_keymap("n", "<C-h>", "<C-w>h", keymap_options)
-set_keymap("n", "<C-j>", "<C-w>j", keymap_options)
-set_keymap("n", "<C-k>", "<C-w>k", keymap_options)
-set_keymap("n", "<C-l>", "<C-w>l", keymap_options)
+vim.keymap.set("n", "<C-h>", "<C-w>h", keymap_options)
+vim.keymap.set("n", "<C-j>", "<C-w>j", keymap_options)
+vim.keymap.set("n", "<C-k>", "<C-w>k", keymap_options)
+vim.keymap.set("n", "<C-l>", "<C-w>l", keymap_options)
 -- Open link. Standard keymap but hack due to netrw disabled
-set_keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape(expand('<cfile>'), 1)<cr>", keymap_options)
+vim.keymap.set("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape(expand('<cfile>'), 1)<cr>", keymap_options)
+-- Popup menu (used by for instance mini completion)
+-- ctrl+j next item
+vim.keymap.set('i', '<C-j>', function() return key_if_pum_visible('<C-n>') end, replace_keycodes)
+-- ctrl+k next item
+vim.keymap.set('i', '<C-k>', function() return key_if_pum_visible('<C-p>') end, replace_keycodes)
+-- Select menu item with enter
+vim.keymap.set('i', '<CR>', function() return key_if_pum_visible('<C-y>', '<CR>') end, replace_keycodes)
+-- Special select with (
+vim.keymap.set('i', '(', function() return key_if_pum_visible('<C-y>(', '(') end, replace_keycodes)
+-- Close popup menu with esc
+vim.keymap.set('i', '<esc>', function() return key_if_pum_visible('<C-e>', '<esc>') end, replace_keycodes)
 
 -- Setup treesitter to use highlighting
 require('nvim-treesitter.configs').setup({
