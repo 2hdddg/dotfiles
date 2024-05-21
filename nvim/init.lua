@@ -141,6 +141,9 @@ vim.keymap.set("n", "<leader>f", function()
     require"telescope.builtin".find_files(opts)
   end
 end)
+vim.keymap.set("n", "<leader>r", function()
+    require "telescope.builtin".resume()
+end, keymap_options)
 vim.keymap.set("n", "<leader>F", "<cmd>lua require('telescope.builtin').find_files()<cr>", keymap_options)          -- Fuzzy find among all files
 vim.keymap.set("n", "<leader>g", "<cmd>lua require('telescope.builtin').grep_string()<cr>", keymap_options)         -- Grep under cursor
 vim.keymap.set("n", "<leader>G", "<cmd>lua require('telescope.builtin').live_grep()<cr>", keymap_options)           -- Live grep
