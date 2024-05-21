@@ -178,15 +178,15 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", keymap_options)
 vim.keymap.set("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape(expand('<cfile>'), 1)<cr>", keymap_options)
 -- Popup menu (used by for instance mini completion)
 -- ctrl+j next item
-vim.keymap.set('i', '<C-j>', function() return key_if_pum_visible('<C-n>') end, replace_keycodes)
+vim.keymap.set({'i','c'}, '<C-j>', function() return key_if_pum_visible('<C-n>') end, replace_keycodes)
 -- ctrl+k next item
-vim.keymap.set('i', '<C-k>', function() return key_if_pum_visible('<C-p>') end, replace_keycodes)
+vim.keymap.set({'i','c'}, '<C-k>', function() return key_if_pum_visible('<C-p>') end, replace_keycodes)
 -- Select menu item with enter
-vim.keymap.set('i', '<CR>', function() return key_if_pum_visible('<C-y>', '<CR>') end, replace_keycodes)
+vim.keymap.set({'i','c'}, '<CR>', function() return key_if_pum_visible('<C-y>', '<CR>') end, replace_keycodes)
 -- Special select with (
 vim.keymap.set('i', '(', function() return key_if_pum_visible('<C-y>(', '(') end, replace_keycodes)
 -- Close popup menu with esc
-vim.keymap.set('i', '<esc>', function() return key_if_pum_visible('<C-e>', '<esc>') end, replace_keycodes)
+vim.keymap.set({'i','c'}, '<esc>', function() return key_if_pum_visible('<C-e>', '<esc>') end, replace_keycodes)
 
 -- Setup treesitter to use highlighting
 require('nvim-treesitter.configs').setup({
