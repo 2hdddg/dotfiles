@@ -7,6 +7,15 @@ local on_attach = function(client, bufnr)
     local bufopts =  {noremap=true, silent=true, buffer=bufnr}
     vim.keymap.set('n', ',q', function()
         vim.cmd('ClangdSwitchSourceHeader')
+        vim.lsp.buf_request(
+            0,
+            "textDocument/switchSourceHeader",
+            { uri = vim.uri_from_bufnr(0) },
+            function(err, uri)
+                if err or not uri or uri == "" then return end
+                vim.api.nvim_cmd({cmd = "e", args = { vim.uri_to_fname(uri)}}, {})
+            end
+        )
     end, bufopts)
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 end

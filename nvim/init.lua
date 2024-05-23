@@ -36,8 +36,6 @@ vim.lsp.set_log_level("off")
 local plugins = {
     -- LSP configuration support
     'neovim/nvim-lspconfig',
-    -- Enhanced C++
-    'p00f/clangd_extensions.nvim',
     -- Completion
     { 'echasnovski/mini.completion', branch = 'stable' },
     -- Git
