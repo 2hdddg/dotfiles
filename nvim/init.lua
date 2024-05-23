@@ -38,11 +38,11 @@ local plugins = {
     'neovim/nvim-lspconfig',
     -- Enhanced C++
     'p00f/clangd_extensions.nvim',
+    -- Completion
     { 'echasnovski/mini.completion', branch = 'stable' },
     -- Git
     'tpope/vim-fugitive',
     -- For telescope
-    'nvim-lua/popup.nvim',
     'nvim-lua/plenary.nvim',
     -- Native fzf
     { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
@@ -50,8 +50,6 @@ local plugins = {
     { 'nvim-telescope/telescope.nvim', branch = '0.1.x'  },
     -- Syntax highlight and more
     { 'nvim-treesitter/nvim-treesitter' },
-    -- Resize windows with Ctrl-E
-    'simeji/winresizer',
     -- Status line
     'nvim-lualine/lualine.nvim',
     -- For looks
@@ -173,6 +171,9 @@ vim.keymap.set("n", ",3", "<cmd>lua require('toggleTerm').to_terminal(3)<cr>", k
 vim.keymap.set("n", ",4", "<cmd>lua require('toggleTerm').to_terminal(4)<cr>", keymap_options)
 vim.keymap.set("t", '<C-l>', term_clear)
 -- Window navigation
+-- C-w+ and C-w- resizes height
+-- C-w< and C-w> resizes width (C-w10< reduces with 10 columns)
+-- C-w| and C-w_ maximizes width and height
 vim.keymap.set("n", "<C-h>", "<C-w>h", keymap_options)
 vim.keymap.set("n", "<C-j>", "<C-w>j", keymap_options)
 vim.keymap.set("n", "<C-k>", "<C-w>k", keymap_options)
