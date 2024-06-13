@@ -6,7 +6,6 @@ local on_attach = function(client, bufnr)
     -- Map Clangd specific command to toggle between h/cpp
     local bufopts =  {noremap=true, silent=true, buffer=bufnr}
     vim.keymap.set('n', ',q', function()
-        vim.cmd('ClangdSwitchSourceHeader')
         vim.lsp.buf_request(
             0,
             "textDocument/switchSourceHeader",
@@ -25,7 +24,6 @@ require('lspconfig').clangd.setup{
     -- Clangd specific settings
     cmd = { "clangd", "--all-scopes-completion", "--offset-encoding=utf-16", "--background-index", "--clang-tidy", "--header-insertion=iwyu", "--header-insertion-decorators", "--completion-style=detailed", "--pretty" },
 }
-require("clangd_extensions").setup({})
 vim.cmd('packadd termdebug')
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
