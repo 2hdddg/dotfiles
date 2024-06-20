@@ -37,7 +37,7 @@ local plugins = {
     -- LSP configuration support
     'neovim/nvim-lspconfig',
     -- Completion
-    { 'echasnovski/mini.completion', branch = 'stable' },
+    'echasnovski/mini.completion',
     -- Git
     'tpope/vim-fugitive',
     -- For telescope
@@ -52,8 +52,6 @@ local plugins = {
     'nvim-lualine/lualine.nvim',
     -- For looks
     'nvim-tree/nvim-web-devicons',
-    -- For marks in gutter
-    'chentoast/marks.nvim',
     -- Toggle terminal
     '2hdddg/toggleTerm.nvim',
     -- File explorer
@@ -81,7 +79,6 @@ if install_plugins then
     return
 end
 
-require("marks").setup({})
 require('mini.completion').setup({
     window = {
         info = { height = 25, width = 80, border= "rounded" },
@@ -143,6 +140,7 @@ end, keymap_options)
 vim.keymap.set("n", "<leader>F", "<cmd>lua require('telescope.builtin').find_files()<cr>", keymap_options)          -- Fuzzy find among all files
 vim.keymap.set("n", "<leader>g", "<cmd>lua require('telescope.builtin').grep_string()<cr>", keymap_options)         -- Grep under cursor
 vim.keymap.set("n", "<leader>G", "<cmd>lua require('telescope.builtin').live_grep()<cr>", keymap_options)           -- Live grep
+vim.keymap.set("n", "<leader>m", "<cmd>Telescope marks<cr>", keymap_options)
 vim.keymap.set("n", "<leader>q", "<cmd>lua require('telescope.builtin').quickfix()<cr>", keymap_options)            -- List of quick fixes
 vim.keymap.set("n", "<leader>s", "<cmd>Telescope lsp_document_symbols<cr>", keymap_options)
 vim.keymap.set("n", "<leader>S", "<cmd>Telescope lsp_workspace_symbols<cr>", keymap_options)
@@ -232,7 +230,6 @@ require('oil').setup({
     },
     buf_options = {
         buflisted = true,
-
     },
     view_options = {
         show_hidden = true,
