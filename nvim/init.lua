@@ -13,7 +13,7 @@ vim.o.signcolumn = "yes:1"
 vim.o.clipboard = "unnamed,unnamedplus"
 vim.o.gdefault = false -- Otherwise substitution doesn't work multiple times per line
 vim.o.cmdheight = 0 -- Gives one more line of core. Requires nvim >= 0.8
-vim.o.completeopt = "menu,noinsert,popup"
+vim.o.completeopt = "menuone,noinsert,popup"
 vim.o.relativenumber = true
 vim.o.pumheight = 10 -- Size of completion pop
 vim.o.pumwidth = 80

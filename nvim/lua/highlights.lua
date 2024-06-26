@@ -29,8 +29,8 @@ local theme = {
     -- Completion menu
     Pmenu = { bg=colors.white, fg=colors.xgray2 },
     PmenuSel = { fg=colors.xorange, style="reverse" },
-    PmenuSbar = { bg=colors.black },
-    PmenuThumb = { bg=colors.black },
+    PmenuSbar = { bg=colors.xgray2 },
+    PmenuThumb = { bg=colors.yellow },
     --Pmenu
     --PmenuExtra
     --PmenuSel
