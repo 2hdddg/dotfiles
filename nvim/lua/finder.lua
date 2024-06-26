@@ -5,7 +5,6 @@ telescope.setup{
     layout_strategy = 'bottom_pane',
     sorting_strategy = "ascending",
     wrap_results = true,
-    vimgrep_arguments = { 'ag', '--vimgrep' },
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,

@@ -1,3 +1,7 @@
+-- Install on host:
+-- ripgrep (for Telescope)
+-- wl-clipboard or xclip (Wayland or X) for clipboard
+
 -- Options
 vim.o.number = true
 vim.o.hidden = true
@@ -10,7 +14,7 @@ vim.o.wrap = false
 vim.o.modeline = false
 vim.o.swapfile = false
 vim.o.signcolumn = "yes:1"
-vim.o.clipboard = "unnamed,unnamedplus"
+vim.o.clipboard = "unnamedplus"
 vim.o.gdefault = false -- Otherwise substitution doesn't work multiple times per line
 vim.o.cmdheight = 0 -- Gives one more line of core. Requires nvim >= 0.8
 vim.o.completeopt = "menuone,noinsert,popup"
