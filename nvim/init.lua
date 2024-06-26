@@ -34,8 +34,6 @@ vim.lsp.set_log_level("off")
 -- For TODO highlight to work: TSInstall comment
 
 local plugins = {
-    -- LSP configuration support
-    'neovim/nvim-lspconfig',
     -- Completion
     'echasnovski/mini.completion',
     -- Git
@@ -89,13 +87,6 @@ require('mini.completion').setup({
 require('finder')
 require('highlights')
 require('statusline') -- Must be after highlights
-
-local term_clear = function()
-    --vim.fn.feedkeys("^L", 'n')
-    local sb = vim.bo.scrollback
-    vim.bo.scrollback = 1
-    vim.bo.scrollback = sb
-end
 
 -- ==========================
 -- Keymaps
@@ -165,7 +156,6 @@ vim.keymap.set("n", ",1", "<cmd>lua require('toggleTerm').to_terminal(1)<cr>", k
 vim.keymap.set("n", ",2", "<cmd>lua require('toggleTerm').to_terminal(2)<cr>", keymap_options)
 vim.keymap.set("n", ",3", "<cmd>lua require('toggleTerm').to_terminal(3)<cr>", keymap_options)
 vim.keymap.set("n", ",4", "<cmd>lua require('toggleTerm').to_terminal(4)<cr>", keymap_options)
-vim.keymap.set("t", '<C-l>', term_clear)
 -- Window navigation
 -- C-w+ and C-w- resizes height
 -- C-w< and C-w> resizes width (C-w10< reduces with 10 columns)
@@ -246,3 +236,27 @@ require('oil').setup({
     },
 })
 
+vim.api.nvim_create_user_command(
+    "LspInfo",
+    function(opts)
+        -- Create temporary lua buffer
+        local buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_buf_set_option(buf, "buftype", "nofile")
+        vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+        vim.api.nvim_buf_set_option(buf, "filetype", "lua")
+        vim.api.nvim_win_set_buf(vim.api.nvim_get_current_win(), buf)
+        -- Fill it with LSP client info
+        local txt = vim.inspect(vim.lsp.get_active_clients({bufnr=0}))
+        vim.api.nvim_paste(txt, true, -1)
+        -- Move to top of buffer
+        vim.cmd('0')
+    end,
+    {}
+)
+vim.api.nvim_create_user_command(
+    "LspLog",
+    function(opts)
+        vim.cmd("e " .. vim.lsp.get_log_path())
+    end,
+    {}
+)

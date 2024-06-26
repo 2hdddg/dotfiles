@@ -1,12 +1,7 @@
-if vim.g.goplsSetup == 1 then
-    return
-end
-local on_attach = function(client, bufnr)
-    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-end
-local lspconfig = require'lspconfig'
-lspconfig.gopls.setup{
-    on_attach = on_attach,
+local client_id = vim.lsp.start({
+    name = 'gopls',
+    cmd = { 'gopls', '-remote=auto', '-logfile=auto' },
+    root_dir = vim.fs.root(0, {'.git', 'go.mod'}),
     settings = {
         gopls = {
             analyses = {
@@ -16,5 +11,7 @@ lspconfig.gopls.setup{
             semanticTokens = true,
         },
     },
-}
-vim.g.goplsSetup = 1
+})
+vim.lsp.buf_attach_client(0, client_id)
+-- Auto format on write
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]

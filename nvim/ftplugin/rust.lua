@@ -1,15 +1,6 @@
-if vim.g.rustSetup == 1 then
-    return
-end
-vim.g.rustSetup = 1
-
-local nvim_lsp = require'lspconfig'
-
-local on_attach = function(client)
-    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-end
-nvim_lsp.rust_analyzer.setup({
-    on_attach=on_attach,
+local client_id = vim.lsp.start({
+    name = 'rust-analyzer',
+    cmd = { 'rust-analyzer' },
     settings = {
         ["rust-analyzer"] = {
             imports = {
@@ -53,3 +44,5 @@ nvim_lsp.rust_analyzer.setup({
             },
         },
 }})
+vim.lsp.buf_attach_client(0, client_id)
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
