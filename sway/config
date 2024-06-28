@@ -184,6 +184,7 @@ input "type:keyboard" {
 }
 bindsym $mod+Shift+u exec swaymsg input type:keyboard xkb_layout "us"
 bindsym $mod+Shift+s exec swaymsg input type:keyboard xkb_layout "se"
+bindsym $mod+Shift+e exec swaymsg input type:keyboard xkb_layout "eu"
 
 # Lock screen
 bindsym $mod+Shift+x exec swaylock --color $color_black --hide-keyboard-layout --indicator-radius 256 --indicator-thickness 60
