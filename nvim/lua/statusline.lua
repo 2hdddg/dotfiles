@@ -74,31 +74,30 @@ local theme = {
     a = {bg = colors.xgray6, fg = colors.black},
     b = {bg = colors.xgray6, fg = colors.black},
     c = {bg = colors.xgray6, fg = colors.black},
-    x = {bg = colors.xgray6, fg = colors.black},
+    x = {bg = colors.black, fg = colors.black},
     y = {bg = colors.xgray6, fg = colors.black},
     z = {bg = colors.xgray6, fg = colors.black},
-  },
-  inactive_sections = {
-    lualine_a = {pathOrFilename},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}}},
-    lualine_y = {'progress'},
-    lualine_z = {'location'},
   },
 }
 require'lualine'.setup {
   options = {
-    icons_enabled = false,
+    icons_enabled = true,
     theme = theme,
     component_separators = {'', ''},
     section_separators = {'', ''},
-    disabled_filetypes = {'class'}
   },
   sections = {
     lualine_a = {pathOrFilename},
     lualine_b = {recordingMacro},
     lualine_c = {searchStatus},
+    lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}}},
+    lualine_y = {'progress'},
+    lualine_z = {'location'},
+  },
+  inactive_sections = {
+    lualine_a = {pathOrFilename},
+    lualine_b = {},
+    lualine_c = {},
     lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}}},
     lualine_y = {'progress'},
     lualine_z = {'location'},

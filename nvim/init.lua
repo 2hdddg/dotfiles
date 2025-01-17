@@ -93,6 +93,8 @@ require('mini.completion').setup({
 })
 require('finder')
 require('highlights')
+vim.api.nvim_set_hl(0, "StatusLine", {reverse = false})
+vim.api.nvim_set_hl(0, "StatusLineNC", {reverse = false})
 require('statusline') -- Must be after highlights
 
 
