@@ -33,7 +33,7 @@ vim.opt.showmatch = true -- Highlight matching brackets
 vim.opt.matchtime = 1
 -- Set leader before any plugins
 vim.g.mapleader = " "
-vim.lsp.set_log_level("off")
+vim.lsp.set_log_level("info")
 
 -- For TODO highlight to work: TSInstall comment
 
@@ -53,7 +53,8 @@ local plugins = {
     -- Status line
     'nvim-lualine/lualine.nvim',
     -- For looks
-    'nvim-tree/nvim-web-devicons',
+    'echasnovski/mini.icons',
+    --'nvim-tree/nvim-web-devicons',
     -- Toggle terminal
     '2hdddg/toggleTerm.nvim',
     -- File explorer
@@ -81,16 +82,19 @@ if install_plugins then
     return
 end
 
+require('mini.icons').setup({})
+require('mini.icons').tweak_lsp_kind('replace')
+
 require('mini.completion').setup({
     window = {
         info = { height = 25, width = 80, border= "rounded" },
         signature = { height = 25, width = 80, border="rounded" },
     },
-    set_vim_settings = false,
 })
 require('finder')
 require('highlights')
 require('statusline') -- Must be after highlights
+
 
 -- ==========================
 -- Keymaps

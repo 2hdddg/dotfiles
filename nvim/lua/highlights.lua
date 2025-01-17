@@ -49,18 +49,10 @@ local theme = {
     TelescopeSelection = { link = 'PmenuSel' },
     TelescopeMatching = {style = "reverse" },
     TelescopeBorder = {link = 'FloatBorder'},
-    -- Telescope file browser
-    -- File attributes
-    TelescopePreviewDirectory = { fg=colors.green }, -- link = 'TelescopePreviewNormal'},
-    TelescopePreviewLink = {link = 'TelescopePreviewNormal'},
-    TelescopePreviewSocket = {link = 'TelescopePreviewNormal'},
-    TelescopePreviewRead = {link = 'TelescopePreviewNormal'},
-    TelescopePreviewWrite = {link = 'TelescopePreviewNormal'},
-    TelescopePreviewExecute = {link = 'TelescopePreviewNormal'},
-    TelescopePreviewHyphen = {link = 'TelescopePreviewNormal'},
-    -- File size
-    -- TelescopePreviewSize
 
+    -- Oil
+    OilFile = {fg = colors.cyan },
+    OilLink = {fg = colors.xorange },
 
     -- Syntax
     -- Used by netrw to show file

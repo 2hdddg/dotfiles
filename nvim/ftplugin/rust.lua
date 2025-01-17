@@ -18,7 +18,7 @@ local client_id = vim.lsp.start({
               loadOutDirsFromCheck = true,
             },
             procMacro = {
-                enable = true
+                enable = true,
             },
             assist = {
                 importGranularity = "module",
@@ -30,7 +30,7 @@ local client_id = vim.lsp.start({
                 addCallParenthesis = true,
                 enableExperimental = true,
                 autoimport = { enable = true },
-                postfix = { enable = false, true },
+                postfix = { enable = false },
             },
             lens = {
                 enable = true,
