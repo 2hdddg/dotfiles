@@ -47,7 +47,7 @@ local plugins = {
     -- Native fzf
     { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
     -- Fuzzy finder over lists
-    { 'nvim-telescope/telescope.nvim', branch = '0.1.x'  },
+    { 'nvim-telescope/telescope.nvim' },
     -- Syntax highlight and more
     { 'nvim-treesitter/nvim-treesitter' },
     -- Status line
@@ -87,8 +87,8 @@ require('mini.icons').tweak_lsp_kind('replace')
 
 require('mini.completion').setup({
     window = {
-        info = { height = 25, width = 80, border= "rounded" },
-        signature = { height = 25, width = 80, border="rounded" },
+        info = { height = 25, width = 80, border = "rounded" },
+        signature = { height = 25, width = 80, border = "rounded" },
     },
 })
 require('finder')

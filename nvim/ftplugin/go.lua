@@ -1,7 +1,11 @@
+local caps = vim.lsp.protocol.make_client_capabilities()
+-- mini.completion does not support this
+caps.textDocument.completion.completionItem.snippetSupport = false
 local client_id = vim.lsp.start({
     name = 'gopls',
     cmd = { 'gopls', '-remote=auto', '-logfile=auto' },
     root_dir = vim.fs.root(0, {'.git', 'go.mod'}),
+    capabilities = caps,
     settings = {
         gopls = {
             analyses = {
