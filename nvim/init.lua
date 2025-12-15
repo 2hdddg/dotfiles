@@ -9,7 +9,7 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.cursorline = true
 vim.o.cursorcolumn = true
-vim.o.colorcolumn = "80"
+--vim.o.colorcolumn = "80"
 vim.o.wrap = false
 vim.o.modeline = false
 vim.o.swapfile = false
@@ -84,6 +84,7 @@ end
 
 require('mini.icons').setup({})
 require('mini.icons').tweak_lsp_kind('replace')
+
 
 require('mini.completion').setup({
     window = {

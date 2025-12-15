@@ -1,5 +1,5 @@
 local caps = vim.lsp.protocol.make_client_capabilities()
--- mini.completion does not support this
+-- Annoying
 caps.textDocument.completion.completionItem.snippetSupport = false
 local client_id = vim.lsp.start({
     name = 'gopls',

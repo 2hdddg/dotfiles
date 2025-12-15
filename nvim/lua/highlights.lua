@@ -81,6 +81,14 @@ local theme = {
     -- Want this to override above but they are same priority...
     ['@lsp.typemod.property.readonly'] = {link='Constant'},
     ['@lsp.typemod.property.readonly.cpp'] = {link='Constant'},
+    -- Rust
+    --['@lsp.type.variable.rust'] = {link='Constant'},
+    --['@lsp.type.property.rust'] = {link='Constant'},
+    --['@lsp.type.parameter.rust'] = {link='Constant'},
+    ['@lsp.typemod.variable.mutable.rust'] = {fg=colors.xbright_orange},
+    ['@lsp.typemod.parameter.mutable.rust'] = {fg=colors.xbright_orange},
+
+
     -- Type
     Type = {fg=colors.cyan},
     Structure = {link='Structure'},
