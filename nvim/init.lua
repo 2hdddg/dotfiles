@@ -17,10 +17,10 @@ vim.o.signcolumn = "yes:1"
 vim.o.clipboard = "unnamedplus"
 vim.o.gdefault = false -- Otherwise substitution doesn't work multiple times per line
 vim.o.cmdheight = 0 -- Gives one more line of core. Requires nvim >= 0.8
-vim.o.completeopt = "menuone,noinsert,popup"
+vim.o.completeopt = "menuone,noselect,popup,fuzzy"
 vim.o.relativenumber = true
-vim.o.pumheight = 10 -- Size of completion pop
-vim.o.pumwidth = 80
+vim.o.pumheight = 12 -- Size of completion popup
+vim.o.pumwidth = 60
 vim.opt.termguicolors = false -- Rely on terminal palette
 vim.opt.listchars = { tab = "»·", trail = "·", extends="#"}
 vim.opt.list = true
@@ -91,6 +91,9 @@ require('mini.completion').setup({
         info = { height = 25, width = 80, border = "rounded" },
         signature = { height = 25, width = 80, border = "rounded" },
     },
+    lsp_completion = {
+        source_func = 'omnifunc',
+    }
 })
 require('finder')
 require('highlights')
