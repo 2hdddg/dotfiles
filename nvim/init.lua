@@ -173,16 +173,8 @@ require('nvim-treesitter.configs').setup({
         enable = true,
         additional_vim_regex_highlighting = false,
     },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "gnn", -- set to `false` to disable one of the mappings
-        node_incremental = "gni",
-        node_decremental = "gnd",
-        scope_incremental = "grc",
-      },
-    },
 })
+
 -- LSP UI
 -- Help popup on ,h
 -- ctr-w w to move cursor to it
@@ -228,20 +220,11 @@ require('oil').setup({
 vim.api.nvim_create_user_command(
     "LspInfo",
     function(opts)
-        -- Create temporary lua buffer
-        local buf = vim.api.nvim_create_buf(false, true)
-        vim.api.nvim_buf_set_option(buf, "buftype", "nofile")
-        vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
-        vim.api.nvim_buf_set_option(buf, "filetype", "lua")
-        vim.api.nvim_win_set_buf(vim.api.nvim_get_current_win(), buf)
-        -- Fill it with LSP client info
-        local txt = vim.inspect(vim.lsp.get_active_clients({bufnr=0}))
-        vim.api.nvim_paste(txt, true, -1)
-        -- Move to top of buffer
-        vim.cmd('0')
+        print(vim.inspect(vim.lsp.get_clients({bufnr=0})))
     end,
     {}
 )
+
 vim.api.nvim_create_user_command(
     "LspLog",
     function(opts)
