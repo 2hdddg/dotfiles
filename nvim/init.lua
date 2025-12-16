@@ -33,58 +33,33 @@ vim.opt.showmatch = true -- Highlight matching brackets
 vim.opt.matchtime = 1
 -- Set leader before any plugins
 vim.g.mapleader = " "
-vim.lsp.set_log_level("info")
+vim.lsp.log.set_level("info")
 
 -- For TODO highlight to work: TSInstall comment
 
-local plugins = {
+vim.pack.add({
     -- Completion
-    'echasnovski/mini.completion',
+    'https://github.com/echasnovski/mini.completion',
     -- Git
-    'tpope/vim-fugitive',
+    'https://github.com/tpope/vim-fugitive',
     -- For telescope
-    'nvim-lua/plenary.nvim',
-    -- Native fzf
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" },
+    'https://github.com/nvim-lua/plenary.nvim',
     -- Fuzzy finder over lists
-    { 'nvim-telescope/telescope.nvim' },
+    'https://github.com/nvim-telescope/telescope.nvim',
     -- Syntax highlight and more
-    { 'nvim-treesitter/nvim-treesitter' },
+    'https://github.com/nvim-treesitter/nvim-treesitter',
     -- Status line
-    'nvim-lualine/lualine.nvim',
+    'https://github.com/nvim-lualine/lualine.nvim',
     -- For looks
-    'echasnovski/mini.icons',
-    --'nvim-tree/nvim-web-devicons',
+    'https://github.com/echasnovski/mini.icons',
     -- Toggle terminal
-    '2hdddg/toggleTerm.nvim',
+    'https://github.com/2hdddg/toggleTerm.nvim',
     -- File explorer
-    'stevearc/oil.nvim',
-}
-
--- Bootstrap plugin manager
-local ensure_paq = function()
-    local path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
-    if vim.fn.empty(vim.fn.glob(path)) > 0 then
-        vim.fn.system { 'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', path }
-        vim.cmd [[packadd paq-nvim]]
-        return true
-    end
-    return false
-end
-local install_plugins = ensure_paq()
-local paq = require('paq')
-paq(plugins)
-if install_plugins then
-    paq.install()
-    -- Wait for install to complete before proceeding to quit
-    vim.cmd('autocmd User PaqDoneInstall quit')
-    -- Can not continue to setup plugins here since they are being installed async
-    return
-end
+    'https://github.com/stevearc/oil.nvim',
+})
 
 require('mini.icons').setup({})
 require('mini.icons').tweak_lsp_kind('replace')
-
 
 require('mini.completion').setup({
     window = {
