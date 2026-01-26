@@ -19,6 +19,7 @@ vim.o.gdefault = false -- Otherwise substitution doesn't work multiple times per
 vim.o.cmdheight = 0 -- Gives one more line of core. Requires nvim >= 0.8
 vim.o.completeopt = "menuone,noselect,popup,fuzzy"
 vim.o.relativenumber = true
+vim.o.pumborder= 'rounded'
 vim.o.pumheight = 12 -- Size of completion popup
 vim.o.pumwidth = 60
 vim.opt.termguicolors = false -- Rely on terminal palette
@@ -56,6 +57,8 @@ vim.pack.add({
     'https://github.com/2hdddg/toggleTerm.nvim',
     -- File explorer
     'https://github.com/stevearc/oil.nvim',
+    -- Copilot
+    --'https://github.com/github/copilot.vim.git'
 })
 
 require('mini.icons').setup({})
@@ -215,6 +218,7 @@ require('oil').setup({
         ["<C-z>"] = "actions.open_terminal",
         ["<C-c>"] = "actions.open_cmdline_dir",
     },
+    use_default_keymaps = false,
 })
 
 vim.api.nvim_create_user_command(

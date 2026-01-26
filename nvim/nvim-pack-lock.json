@@ -1,23 +1,27 @@
 {
   "plugins": {
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim.git"
+    },
     "lualine.nvim": {
       "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.completion": {
-      "rev": "7c5edfc0e479dd4edd898cc9ddd1920d8c1ce420",
+      "rev": "4d451f82f193f6751719935a63d16ccb79a76e0b",
       "src": "https://github.com/echasnovski/mini.completion"
     },
     "mini.icons": {
-      "rev": "ff2e4f1d29f659cc2bad0f9256f2f6195c6b2428",
+      "rev": "efc85e42262cd0c9e1fdbf806c25cb0be6de115c",
       "src": "https://github.com/echasnovski/mini.icons"
     },
     "nvim-treesitter": {
-      "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
+      "rev": "568ede7e79172a0fe7c9d631454a97ad968deaf2",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "oil.nvim": {
-      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
+      "rev": "f55b25e493a7df76371cfadd0ded5004cb9cd48a",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "plenary.nvim": {
@@ -25,7 +29,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "telescope.nvim": {
-      "rev": "e69b434b968a33815e2f02a5c7bd7b8dd4c7d4b2",
+      "rev": "ad7d9580338354ccc136e5b8f0aa4f880434dcdc",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "toggleTerm.nvim": {
