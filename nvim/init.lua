@@ -171,7 +171,7 @@ vim.keymap.set('i', '(', function() return key_if_pum_visible('<C-y>(', '(') end
 vim.keymap.set({'i','c'}, '<esc>', function() return key_if_pum_visible('<C-e>', '<esc>') end, replace_keycodes)
 
 -- Setup treesitter to use highlighting
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter').setup({
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -181,21 +181,21 @@ require('nvim-treesitter.configs').setup({
 -- LSP UI
 -- Help popup on ,h
 -- ctr-w w to move cursor to it
-vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(
-  vim.lsp.handlers.hover,
-  {
-    border = "single"
-  }
-)
+--vim.lsp.handlers["textDocument/hover"] =
+--  vim.lsp.with(
+--  vim.lsp.handlers.hover,
+--  {
+--    border = "single"
+--  }
+--)
 -- Smaller box
-vim.lsp.handlers["textDocument/signatureHelp"] =
-  vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  {
-    border = "single"
-  }
-)
+--vim.lsp.handlers["textDocument/signatureHelp"] =
+--  vim.lsp.with(
+--  vim.lsp.handlers.signature_help,
+--  {
+--    border = "single"
+--  }
+--)
 
 -- Oil
 require('oil').setup({
