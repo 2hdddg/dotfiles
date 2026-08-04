@@ -15,13 +15,15 @@ telescope.setup{
         ["<C-k>"] = actions.move_selection_previous,
       },
     },
-  },
-  extensions = {
-      file_browser = {
-          hijack_netrw = true,
-          hidden = true,
-          grouped = true,
-          hide_parent_dir = true,
-      },
+    vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "--hidden", -- Include hidden files/directories
+    },
   },
 }
