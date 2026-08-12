@@ -79,7 +79,12 @@ vim.api.nvim_set_hl(0, "StatusLine", {reverse = false})
 vim.api.nvim_set_hl(0, "StatusLineNC", {reverse = false})
 require('statusline') -- Must be after highlights
 
-require('hop').setup()
+require('hop').setup({
+    quit_key = "<leader>",
+    reverse_distribution = true,
+    dim_unmatched = false,
+    uppercase_labels = true,
+})
 
 -- ==========================
 -- Keymaps
@@ -172,11 +177,14 @@ vim.keymap.set('i', '(', function() return key_if_pum_visible('<C-y>(', '(') end
 vim.keymap.set({'i','c'}, '<esc>', function() return key_if_pum_visible('<C-e>', '<esc>') end, replace_keycodes)
 -- Hop
 local hop = require('hop')
-local directions = require('hop.hint').HintDirection
 vim.keymap.set("n", "<leader><leader>", function()
   hop.hint_words({
       multi_windows = true,
   })
+end, {remap=true})
+local hop = require('hop-treesitter')
+vim.keymap.set("n", "<C-space>", function()
+  hop.hint_nodes()
 end, {remap=true})
 
 -- Setup treesitter to use highlighting
